@@ -287,7 +287,7 @@ function Hero({ onApply, onDonate }) {
             style={{ height: 1, width: 44, background: "rgba(242,237,228,.3)", marginBottom: 24, transformOrigin: "left" }} />
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1.1 }}
             style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: "clamp(15px,1.45vw,17px)", lineHeight: 1.9, color: "rgba(242,237,228,.58)", maxWidth: 420, marginBottom: 36, letterSpacing: ".015em" }}>
-            Common Table is a private members fellowship. Every week, in cities around the world, members sit down together for a real meal — in each other's homes, around real fire, without phones.
+            Common Table is a private dinner community. Every week, in cities around the world, members sit down together for a real meal — in each other's homes, around real fire, without phones.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.9, duration: 1 }}
             style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
@@ -317,9 +317,9 @@ function Mission() {
   const LINES = [
     { t: "The world got very lonely.", s: "lead" },
     { t: "We went the other way.", s: "terra" },
-    { t: "Common Table is a private fellowship of people who believe that a shared meal is the most powerful social technology ever invented.", s: "body" },
+    { t: "Common Table is a private social club for people who believe that a shared meal is the most powerful way to connect.", s: "body" },
     { t: "We gather in each other's homes. We cook real food. We leave our phones at the door.", s: "body" },
-    { t: "Not everyone is right for this. But you might be.", s: "lead-small" },
+    { t: "Not every room is for everyone. This one might be for you.", s: "lead-small" },
   ];
 
   return (
@@ -354,7 +354,7 @@ function Mission() {
             <div>
               <Rule align="left" color="var(--sage)" />
               <p className="body" style={{ marginTop: 18 }}>
-                Every member is vouched for by someone already inside and reviewed by our committee. This isn't gatekeeping — it's how we protect the culture that makes the table worth sitting at.
+                Every member is sponsored by someone already inside and reviewed by our team. This isn't gatekeeping — it's how we keep the table worth sitting at.
               </p>
             </div>
           </div>
@@ -450,7 +450,7 @@ function Membership({ onApply }) {
               </h2>
             </div>
             <p className="body">
-              Every member is vouched for by someone already inside and reviewed by our committee. Not everyone will be accepted — and that's what makes the table worth sitting at.
+              Every member is sponsored by someone already inside and reviewed by our team. The best rooms in any city are always curated — this is no different.
             </p>
           </div>
         </Reveal>
@@ -475,8 +475,8 @@ function Membership({ onApply }) {
                   "RSVP to any Common Table dinner worldwide",
                   "Four dinners per month included",
                   "Access to the member directory",
-                  "Vouched for by an existing member",
-                  "Reviewed and approved by our committee",
+                  "Sponsored by an existing member",
+                  "Reviewed and approved by our team",
                   "Monthly membership — cancel anytime",
                 ].map((f, i) => (
                   <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
@@ -505,12 +505,13 @@ function Membership({ onApply }) {
               <Rule align="left" color="var(--bark)" />
               <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14, marginBottom: 40 }}>
                 {[
-                  "Free membership — no annual fee, ever",
+                  "Free membership — no monthly fee, ever",
                   "Full food stipend — we cover all hosting costs",
                   "Host as often as you like, minimum quarterly",
                   "Members worldwide can RSVP to your table",
                   "Everything a Member gets, plus the honor of hosting",
-                  "Vouched for by a member + committee review",
+                  "Free Basalith.xyz Estate membership — a $3,600/year value",
+                  "Sponsored by a member + reviewed by our team",
                 ].map((f, i) => (
                   <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                     <div style={{ width: 4, height: 4, borderRadius: "50%", background: "var(--bark)", opacity: .6, marginTop: 8, flexShrink: 0 }} />
@@ -528,7 +529,7 @@ function Membership({ onApply }) {
           <div style={{ padding: "52px var(--pad)", borderTop: "1px solid var(--linen3)", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1 }}>
             {[
               { n:"01", t:"Apply online.", b:"Tell us who you are, what you do, and why this feels right. Include the name of the member vouching for you." },
-              { n:"02", t:"We review.", b:"Our committee reads every application personally. You'll hear back within two weeks." },
+              { n:"02", t:"We review.", b:"Our team reads every application personally. You'll hear back within two weeks." },
               { n:"03", t:"You're in.", b:"Pay your annual fee, activate your membership, and find your first dinner. It's that simple." },
             ].map((s,i) => (
               <div key={s.n} style={{ padding: "0 clamp(16px,3vw,44px) 0", borderRight: i < 2 ? "1px solid var(--linen3)" : "none", paddingLeft: i === 0 ? 0 : "clamp(16px,3vw,44px)" }}>
@@ -712,13 +713,13 @@ function ApplyModal({ onClose }) {
 
   const MEMBER_STEPS = [
     { label:"Tell us who you are.", fields:[{k:"name",ph:"Your full name",lbl:"Name"},{k:"city",ph:"Where you live",lbl:"City"},{k:"email",ph:"Email address",lbl:"Email"}] },
-    { label:"Who's vouching for you?", fields:[{k:"vouch",ph:"Name of your Common Table member",lbl:"Member vouch"},{k:"relation",ph:"How do you know them?",lbl:"Relationship"}] },
+    { label:"Who's sponsoring you?", fields:[{k:"vouch",ph:"Name of your Common Table member",lbl:"Your sponsor"},{k:"relation",ph:"How do you know them?",lbl:"Relationship"}] },
     { label:"Why Common Table?", fields:[{k:"why",ph:"Say it however it comes.",lbl:"In your own words",ta:true}] },
   ];
   const HOST_STEPS = [
     { label:"Tell us who you are.", fields:[{k:"name",ph:"Your full name",lbl:"Name"},{k:"city",ph:"Your city",lbl:"City"},{k:"email",ph:"Email address",lbl:"Email"}] },
     { label:"Tell us about your table.", fields:[{k:"space",ph:"Describe your space and how many it seats",lbl:"Your space"},{k:"cook",ph:"What do you love to cook?",lbl:"Your cooking"}] },
-    { label:"How often can you host?", fields:[{k:"freq",ph:"Weekly, monthly, quarterly — be honest",lbl:"Frequency"},{k:"vouch",ph:"Name of your Common Table member vouch",lbl:"Member vouch"}] },
+    { label:"How often can you host?", fields:[{k:"freq",ph:"Weekly, monthly, quarterly — be honest",lbl:"Frequency"},{k:"vouch",ph:"Name of your Common Table member sponsor",lbl:"Your sponsor"}] },
     { label:"Why do you want to host?", fields:[{k:"why",ph:"Say it however it comes.",lbl:"In your own words",ta:true}] },
   ];
 
@@ -756,7 +757,7 @@ function ApplyModal({ onClose }) {
               </h3>
               <Rule align="left" />
               <p className="body" style={{marginTop:18,fontSize:14.5,lineHeight:1.85}}>
-                Our committee reviews every application personally. In the meantime — find the member who vouched for you and thank them. They opened this door.
+                Our team reads every application personally. In the meantime — find the member who sponsored you and thank them. They opened this door.
               </p>
             </motion.div>
           ) : !type ? (
@@ -772,7 +773,7 @@ function ApplyModal({ onClose }) {
                   onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--linen3)";e.currentTarget.style.background="transparent";}}
                 >
                   <div style={{fontFamily:"var(--serif)",fontWeight:400,fontSize:18,color:"var(--ink)",marginBottom:6}}>Member</div>
-                  <div className="body" style={{fontSize:13}}>$150/month · Four dinners · Any city · Vouched + committee reviewed</div>
+                  <div className="body" style={{fontSize:13}}>$150/month · Four dinners · Any city · Sponsored + team reviewed</div>
                 </button>
                 <button onClick={()=>setType("host")}
                   style={{padding:"22px 24px",border:"1px solid var(--linen3)",background:"transparent",cursor:"pointer",textAlign:"left",transition:"all .28s"}}
@@ -780,7 +781,7 @@ function ApplyModal({ onClose }) {
                   onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--linen3)";e.currentTarget.style.background="transparent";}}
                 >
                   <div style={{fontFamily:"var(--serif)",fontWeight:400,fontSize:18,color:"var(--ink)",marginBottom:6}}>Table Host</div>
-                  <div className="body" style={{fontSize:13}}>Free membership · Full food stipend · Open your home · Quarterly minimum</div>
+                  <div className="body" style={{fontSize:13}}>Free membership · Full food stipend · Free Basalith.xyz Estate ($3,600/yr) · Quarterly minimum</div>
                 </button>
               </div>
             </motion.div>
