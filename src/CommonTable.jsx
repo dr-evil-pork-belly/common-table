@@ -266,7 +266,7 @@ function Hero({ onApply, onDonate }) {
         <div style={{ position: "absolute", top: "50%", transform: "translateY(-54%)", left: "var(--pad)", maxWidth: 580, zIndex: 10 }}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .5, duration: 1.1 }}
             className="eyebrow" style={{ color: "rgba(242,237,228,.48)", marginBottom: 22 }}>
-            A Members-Only Fellowship
+            A Private Dinner Community
           </motion.div>
           <div style={{ overflow: "hidden" }}>
             <motion.div initial={{ y: "108%" }} animate={{ y: "0%" }}
@@ -348,7 +348,7 @@ function Mission() {
             <div>
               <Rule align="left" />
               <p className="body" style={{ marginTop: 18 }}>
-                Common Table is a program of Basalith.org, a registered nonprofit. Membership is $150 per year — less than a nice dinner out, more meaningful than most things you'll spend it on.
+                Common Table is a program of Basalith.org, a registered nonprofit. Membership is $150 per month — four dinners, any city, any table. Less than a nice dinner out once a week.
               </p>
             </div>
             <div>
@@ -464,20 +464,20 @@ function Membership({ onApply }) {
               <div className="eyebrow" style={{ marginBottom: 20 }}>Member</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 8 }}>
                 <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: "clamp(40px,5vw,64px)", color: "var(--ink)", lineHeight: 1 }}>$150</span>
-                <span style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: 14, color: "var(--ink3)", letterSpacing: ".06em" }}>/ year</span>
+                <span style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: 14, color: "var(--ink3)", letterSpacing: ".06em" }}>/ month</span>
               </div>
               <p style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400, fontSize: "clamp(16px,1.6vw,19px)", color: "var(--ink3)", marginBottom: 32, lineHeight: 1.5 }}>
-                Come to the table anywhere in the world.
+                Four dinners a month. Any city. Any table.
               </p>
               <Rule align="left" />
               <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14, marginBottom: 40 }}>
                 {[
                   "RSVP to any Common Table dinner worldwide",
+                  "Four dinners per month included",
                   "Access to the member directory",
                   "Vouched for by an existing member",
                   "Reviewed and approved by our committee",
-                  "Annual membership — renews each year",
-                  "Cancel anytime",
+                  "Monthly membership — cancel anytime",
                 ].map((f, i) => (
                   <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                     <div style={{ width: 4, height: 4, borderRadius: "50%", background: "var(--terra)", opacity: .6, marginTop: 8, flexShrink: 0 }} />
@@ -612,7 +612,7 @@ function Cities() {
         {CITIES.map((c,i) => <CityRow key={c.city} c={c} i={i} />)}
         <Reveal delay={.1}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", borderTop: "1px solid var(--linen3)" }}>
-            {[["4","Active cities"],["$150","Annual membership"],["Free","For Table Hosts"],["Weekly","The rhythm"]].map(([val,lbl],i) => (
+            {[["4","Active cities"],["$150","Per month"],["Free","For Table Hosts"],["Weekly","The rhythm"]].map(([val,lbl],i) => (
               <div key={lbl} style={{ padding: "26px clamp(20px,3vw,44px)", borderRight: i < 3 ? "1px solid var(--linen3)" : "none" }}>
                 <div style={{ fontFamily:"var(--serif)", fontStyle:"italic", fontSize:"clamp(24px,3vw,40px)", color:"var(--terra)", lineHeight:1, marginBottom:6 }}>{val}</div>
                 <div className="eyebrow" style={{ fontSize:9, color:"var(--ink3)", opacity:.48 }}>{lbl}</div>
@@ -772,7 +772,7 @@ function ApplyModal({ onClose }) {
                   onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--linen3)";e.currentTarget.style.background="transparent";}}
                 >
                   <div style={{fontFamily:"var(--serif)",fontWeight:400,fontSize:18,color:"var(--ink)",marginBottom:6}}>Member</div>
-                  <div className="body" style={{fontSize:13}}>$150/year · Attend dinners worldwide · Vouched + committee reviewed</div>
+                  <div className="body" style={{fontSize:13}}>$150/month · Four dinners · Any city · Vouched + committee reviewed</div>
                 </button>
                 <button onClick={()=>setType("host")}
                   style={{padding:"22px 24px",border:"1px solid var(--linen3)",background:"transparent",cursor:"pointer",textAlign:"left",transition:"all .28s"}}
