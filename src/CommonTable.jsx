@@ -191,7 +191,7 @@ function Opening({ onEnter }) {
 /* ══════════════════════════════════════
    NAV
 ══════════════════════════════════════ */
-function Nav({ onApply, onDonate }) {
+function Nav({ onApply }) {
   const [sc, setSc] = useState(false);
   useEffect(() => {
     const fn = () => setSc(window.scrollY > 48);
@@ -222,10 +222,6 @@ function Nav({ onApply, onDonate }) {
             onMouseLeave={e => e.currentTarget.style.color = "rgba(30,26,20,.42)"}
           >{l}</a>
         ))}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-          <button className="btn btn-terra" onClick={onDonate} style={{ padding: "8px 18px", fontSize: 10 }}>Donate</button>
-          <span style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: 9, color: "var(--terra)", opacity: .75, letterSpacing: ".08em" }}>from $35</span>
-        </div>
         <button className="btn btn-terra" onClick={onApply} style={{ padding: "8px 18px", fontSize: 10 }}>Apply</button>
       </div>
     </motion.nav>
@@ -235,7 +231,7 @@ function Nav({ onApply, onDonate }) {
 /* ══════════════════════════════════════
    HERO
 ══════════════════════════════════════ */
-function Hero({ onApply, onDonate }) {
+function Hero({ onApply }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start","end start"] });
   const bgY  = useTransform(scrollYProgress, [0,1], ["0%","14%"]);
@@ -302,11 +298,6 @@ function Hero({ onApply, onDonate }) {
             style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             <button className="btn btn-terra" onClick={onApply}>Apply for Membership</button>
             <a href="#story" className="btn btn-light">Our Story</a>
-            <button className="btn btn-light" onClick={onDonate}
-              style={{ borderColor: "rgba(242,237,228,.18)", color: "rgba(242,237,228,.45)" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(242,237,228,.5)"; e.currentTarget.style.color = "rgba(242,237,228,.8)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(242,237,228,.18)"; e.currentTarget.style.color = "rgba(242,237,228,.45)"; }}
-            >Donate</button>
           </motion.div>
         </div>
       </motion.div>
@@ -324,10 +315,10 @@ function Hero({ onApply, onDonate }) {
    IMPACT STRIP
 ══════════════════════════════════════ */
 const IMPACT_STATS = [
-  { val: "1 in 2", lbl: "Americans feel lonely" },
-  { val: "$37",    lbl: "average cost per dinner" },
-  { val: "8",      lbl: "strangers per table" },
-  { val: "Weekly", lbl: "in every city" },
+  { val: "1 in 2",  lbl: "Americans feel lonely" },
+  { val: "$150",    lbl: "per month, four dinners" },
+  { val: "8",       lbl: "strangers per table" },
+  { val: "Weekly",  lbl: "in every city" },
 ];
 
 function ImpactStrip() {
@@ -924,96 +915,10 @@ function ApplyModal({ onClose }) {
   );
 }
 
-const DONATE_LABELS = { 35: "Feed a Seat", 75: "Feed Two Seats", 150: "Feed a Full Table", 500: "Feed a Month of Tables" };
-const IMPACT_EQUIV = [
-  { val: "$35",  lbl: "one seat" },
-  { val: "$150", lbl: "full table" },
-  { val: "$500", lbl: "a month of dinners" },
-];
-
-function DonateModal({ onClose }) {
-  const [amt, setAmt] = useState(35);
-  const [custom, setCustom] = useState("");
-  const [done, setDone] = useState(false);
-  const AMOUNTS = [35, 75, 150, 500];
-  const inp = { width:"100%", background:"transparent", border:"none", borderBottom:"1px solid var(--linen3)", color:"var(--ink)", fontFamily:"var(--sans)", fontWeight:300, fontSize:16, letterSpacing:".018em", padding:"11px 0", outline:"none", transition:"border-color .32s" };
-
-  const btnLabel = amt && DONATE_LABELS[amt]
-    ? `Donate $${amt} — ${DONATE_LABELS[amt]}`
-    : custom ? `Donate $${custom}` : "";
-
-  return (
-    <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.45}}
-      style={{position:"fixed",inset:0,zIndex:9000,background:"rgba(30,26,20,.32)",backdropFilter:"blur(12px)",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}
-      onClick={e=>e.target===e.currentTarget&&onClose()}
-    >
-      <motion.div initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} exit={{opacity:0,y:14}}
-        transition={{duration:.55,ease:[0.22,1,0.28,1]}}
-        style={{width:"100%",maxWidth:468,background:"var(--linen)",border:"1px solid var(--linen3)",padding:"46px 42px",position:"relative"}}
-      >
-        <button onClick={onClose} style={{position:"absolute",top:18,right:20,background:"none",border:"none",cursor:"pointer",color:"rgba(30,26,20,.3)",fontSize:17,lineHeight:1,transition:"color .3s"}}
-          onMouseEnter={e=>e.currentTarget.style.color="var(--terra)"}
-          onMouseLeave={e=>e.currentTarget.style.color="rgba(30,26,20,.3)"}
-        >×</button>
-        <AnimatePresence mode="wait">
-          {done ? (
-            <motion.div key="done" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:.65}}>
-              <div className="eyebrow" style={{marginBottom:18,color:"var(--sage)"}}>Thank you</div>
-              <h3 style={{fontFamily:"var(--serif)",fontWeight:400,fontSize:"clamp(22px,3.5vw,34px)",color:"var(--ink)",lineHeight:1.12,marginBottom:18}}>
-                You just kept<br /><em style={{color:"var(--terra)"}}>a door open.</em>
-              </h3>
-              <Rule align="left" />
-              <p className="body" style={{marginTop:18,fontSize:14.5}}>
-                Your donation funds Table Host stipends through Basalith.org — so every host cooks without worrying about the bill. One more door opened to a stranger.
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div key="form" initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.3}}>
-              <div className="eyebrow" style={{marginBottom:18}}>Support Welltable</div>
-              <h3 style={{fontFamily:"var(--serif)",fontStyle:"italic",fontWeight:400,fontSize:"clamp(20px,2.6vw,28px)",color:"var(--ink)",marginBottom:10,lineHeight:1.2}}>
-                The world closed its doors.<br /><em style={{color:"var(--terra)"}}>Help us set more tables.</em>
-              </h3>
-              <p className="body" style={{marginBottom:32,fontSize:14.5}}>
-                Your gift to Basalith.org covers food stipends for Table Hosts in cities around the world. Tax-deductible. Every dollar means one more evening where strangers become the people you call.
-              </p>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",marginBottom:24,border:"1px solid var(--linen3)"}}>
-                {IMPACT_EQUIV.map((s,i)=>(
-                  <div key={s.val} style={{padding:"14px 12px",background:"var(--linen2)",borderLeft:i>0?"1px solid var(--linen3)":"none",textAlign:"center"}}>
-                    <div style={{fontFamily:"var(--serif)",fontStyle:"italic",fontWeight:400,fontSize:18,color:"var(--terra)",lineHeight:1,marginBottom:5}}>{s.val}</div>
-                    <div style={{fontFamily:"var(--sans)",fontWeight:300,fontSize:9,letterSpacing:".2em",textTransform:"uppercase",color:"var(--ink3)",opacity:.5}}>{s.lbl}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="eyebrow" style={{fontSize:8,marginBottom:12,opacity:.5}}>Choose an amount</div>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginBottom:16}}>
-                {AMOUNTS.map(a=>(
-                  <button key={a} onClick={()=>{setAmt(a);setCustom("");}}
-                    style={{fontFamily:"var(--sans)",fontWeight:300,fontSize:14,padding:"11px 8px",border:"1px solid",borderColor:amt===a?"var(--terra)":"var(--linen3)",background:amt===a?"rgba(184,92,56,.08)":"transparent",color:amt===a?"var(--terra)":"var(--ink3)",cursor:"pointer",transition:"all .28s"}}
-                  >${a}</button>
-                ))}
-              </div>
-              <div className="eyebrow" style={{fontSize:8,marginBottom:8,opacity:.5}}>Or enter your own</div>
-              <input value={custom} onChange={e=>{setCustom(e.target.value);setAmt(null);}} placeholder="$ Other amount" style={inp}
-                onFocus={e=>e.target.style.borderBottomColor="var(--terra)"}
-                onBlur={e=>e.target.style.borderBottomColor="var(--linen3)"} />
-              <button className="btn btn-terra" onClick={()=>setDone(true)} style={{marginTop:32,width:"100%",textAlign:"center"}}>
-                {btnLabel}
-              </button>
-              <p style={{fontFamily:"var(--sans)",fontWeight:300,fontSize:11,color:"rgba(30,26,20,.32)",textAlign:"center",marginTop:14,letterSpacing:".04em"}}>
-                Secure · Tax-deductible · Basalith.org 501(c)(3)
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </motion.div>
-  );
-}
-
 /* ══════════════════════════════════════
    FOOTER
 ══════════════════════════════════════ */
-function Footer({ onApply, onDonate }) {
+function Footer({ onApply }) {
   return (
     <footer style={{ background: "var(--ink)", borderTop: "1px solid rgba(255,255,255,.06)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -1030,11 +935,10 @@ function Footer({ onApply, onDonate }) {
             </div>
             <div>
               <p className="body" style={{ marginBottom: 28, color: "rgba(242,237,228,.45)" }}>
-                For $35, you feed one stranger who becomes someone's person. For $150, you set an entire table. Every dollar goes directly to the hosts who make it possible.
+                Every Saturday, somewhere in the world, someone opens their kitchen and cooks for strangers. Apply for membership and find your table — in your city, or wherever you're going next.
               </p>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 <button className="btn btn-terra" onClick={onApply}>Apply Now</button>
-                <button className="btn btn-light" onClick={onDonate}>Donate — Feed a Table</button>
               </div>
             </div>
           </div>
@@ -1067,7 +971,6 @@ function Footer({ onApply, onDonate }) {
 export default function Welltable() {
   const [entered, setEntered] = useState(false);
   const [applyOpen, setApplyOpen] = useState(false);
-  const [donateOpen, setDonateOpen] = useState(false);
   return (
     <>
       <style>{CSS}</style>
@@ -1076,9 +979,9 @@ export default function Welltable() {
       </AnimatePresence>
       {entered && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.0 }}>
-          <Nav onApply={() => setApplyOpen(true)} onDonate={() => setDonateOpen(true)} />
+          <Nav onApply={() => setApplyOpen(true)} />
           <main>
-            <Hero onApply={() => setApplyOpen(true)} onDonate={() => setDonateOpen(true)} />
+            <Hero onApply={() => setApplyOpen(true)} />
             <ImpactStrip />
             <Story />
             <HowItWorks />
@@ -1086,12 +989,11 @@ export default function Welltable() {
             <HostATable onApply={() => setApplyOpen(true)} />
             <Cities />
           </main>
-          <Footer onApply={() => setApplyOpen(true)} onDonate={() => setDonateOpen(true)} />
+          <Footer onApply={() => setApplyOpen(true)} />
         </motion.div>
       )}
       <AnimatePresence>
         {applyOpen && <ApplyModal onClose={() => setApplyOpen(false)} />}
-        {donateOpen && <DonateModal onClose={() => setDonateOpen(false)} />}
       </AnimatePresence>
     </>
   );
