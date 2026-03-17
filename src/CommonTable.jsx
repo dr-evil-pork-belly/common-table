@@ -222,7 +222,10 @@ function Nav({ onApply, onDonate }) {
             onMouseLeave={e => e.currentTarget.style.color = "rgba(30,26,20,.42)"}
           >{l}</a>
         ))}
-        <button className="btn btn-outline-terra" onClick={onDonate} style={{ padding: "8px 18px", fontSize: 10 }}>Donate</button>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+          <button className="btn btn-terra" onClick={onDonate} style={{ padding: "8px 18px", fontSize: 10 }}>Donate</button>
+          <span style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: 9, color: "var(--terra)", opacity: .75, letterSpacing: ".08em" }}>from $35</span>
+        </div>
         <button className="btn btn-terra" onClick={onApply} style={{ padding: "8px 18px", fontSize: 10 }}>Apply</button>
       </div>
     </motion.nav>
@@ -268,21 +271,21 @@ function Hero({ onApply, onDonate }) {
             <motion.div initial={{ y: "108%" }} animate={{ y: "0%" }}
               transition={{ delay: .65, duration: 1.0, ease: [0.22,1,0.28,1] }}
               style={{ fontFamily: "var(--serif)", fontWeight: 400, fontSize: "clamp(38px,6vw,78px)", lineHeight: .92, letterSpacing: "-.015em", color: "#F2EDE4" }}>
-              Good food.
+              Every Saturday,
             </motion.div>
           </div>
           <div style={{ overflow: "hidden" }}>
             <motion.div initial={{ y: "108%" }} animate={{ y: "0%" }}
               transition={{ delay: .78, duration: 1.0, ease: [0.22,1,0.28,1] }}
               style={{ fontFamily: "var(--serif)", fontWeight: 400, fontSize: "clamp(38px,6vw,78px)", lineHeight: .92, letterSpacing: "-.015em", color: "#F2EDE4" }}>
-              Real people.
+              someone opens
             </motion.div>
           </div>
           <div style={{ overflow: "hidden", marginBottom: 32 }}>
             <motion.div initial={{ y: "108%" }} animate={{ y: "0%" }}
               transition={{ delay: .91, duration: 1.0, ease: [0.22,1,0.28,1] }}
               style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400, fontSize: "clamp(38px,6vw,78px)", lineHeight: .92, letterSpacing: "-.015em", color: "rgba(184,92,56,.9)" }}>
-              No strangers.
+              their kitchen for you.
             </motion.div>
           </div>
 
@@ -292,7 +295,7 @@ function Hero({ onApply, onDonate }) {
 
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.55, duration: 1.1 }}
             style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: "clamp(15px,1.4vw,17px)", lineHeight: 1.9, color: "rgba(242,237,228,.55)", maxWidth: 430, marginBottom: 38, letterSpacing: ".015em" }}>
-            Every week, in cities around the world, Welltable members sit down for a real meal — cooked with love, shared without phones, among people worth knowing.
+            In cities around the world, a neighbor cooks something made from scratch. Eight strangers sit down. By dessert, they're not strangers anymore. Welltable is how it happens — every week, anywhere you are.
           </motion.p>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.9, duration: 1 }}
@@ -313,6 +316,43 @@ function Hero({ onApply, onDonate }) {
         <div style={{ writingMode: "vertical-rl", fontFamily: "var(--sans)", fontWeight: 300, fontSize: 9, letterSpacing: ".3em", textTransform: "uppercase", color: "rgba(242,237,228,.18)" }}>Welltable</div>
         <div style={{ width: 1, height: 30, background: "rgba(242,237,228,.14)" }} />
       </motion.div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════
+   IMPACT STRIP
+══════════════════════════════════════ */
+const IMPACT_STATS = [
+  { val: "1 in 2", lbl: "Americans feel lonely" },
+  { val: "$37",    lbl: "average cost per dinner" },
+  { val: "8",      lbl: "strangers per table" },
+  { val: "Weekly", lbl: "in every city" },
+];
+
+function ImpactStrip() {
+  return (
+    <section style={{ background: "var(--linen2)", borderTop: "1px solid var(--linen3)", borderBottom: "1px solid var(--linen3)" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 var(--pad)" }}>
+        <Reveal>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
+            {IMPACT_STATS.map((s, i) => (
+              <div key={s.lbl} style={{
+                padding: "32px clamp(16px, 3vw, 44px)",
+                borderLeft: i > 0 ? "1px solid var(--linen3)" : "none",
+                display: "flex", flexDirection: "column", gap: 7,
+              }}>
+                <div style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 2.8vw, 32px)", color: "var(--terra)", lineHeight: 1 }}>
+                  {s.val}
+                </div>
+                <div style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: 10, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--ink3)", opacity: .45, lineHeight: 1.5 }}>
+                  {s.lbl}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }
@@ -349,6 +389,25 @@ function Story() {
             }}>{line.t}</p>
           </Reveal>
         ))}
+
+        <Reveal delay={.5}>
+          <div style={{ marginTop: 48 }}>
+            <blockquote style={{
+              borderLeft: "2px solid rgba(184,92,56,.5)",
+              paddingLeft: 20,
+              background: "rgba(184,92,56,.04)",
+              padding: "20px 20px 20px 20px",
+              margin: 0,
+            }}>
+              <p style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400, fontSize: "clamp(16px,1.7vw,20px)", color: "var(--ink3)", lineHeight: 1.75, marginBottom: 16 }}>
+                "I moved here knowing no one. My first Welltable dinner I sat next to a documentary filmmaker and a nurse just back from Nairobi. By the time dessert came out I had three people I actually wanted to see again."
+              </p>
+              <p style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: 12, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--ink3)", opacity: .5, margin: 0 }}>
+                Amara T. — Member since 2023, London
+              </p>
+            </blockquote>
+          </div>
+        </Reveal>
 
         <Reveal delay={.55}>
           <div style={{ marginTop: 60, paddingTop: 44, borderTop: "1px solid var(--linen3)", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(24px,5vw,64px)" }}>
@@ -453,7 +512,7 @@ function Membership({ onApply }) {
               </h2>
             </div>
             <p className="body">
-              Every member is sponsored by someone already inside and reviewed by our team. The best rooms in any city are always curated — and the best tables are no different.
+              Everyone is welcome at Welltable. We ask that you arrive hungry, leave your phone in your pocket, and treat every host like they opened their home for you — because they did.
             </p>
           </div>
         </Reveal>
@@ -467,16 +526,19 @@ function Membership({ onApply }) {
                 <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: "clamp(40px,5vw,64px)", color: "var(--ink)", lineHeight: 1 }}>$150</span>
                 <span style={{ fontFamily: "var(--sans)", fontWeight: 300, fontSize: 14, color: "var(--ink3)", letterSpacing: ".06em" }}>/ month</span>
               </div>
-              <p style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400, fontSize: "clamp(16px,1.6vw,19px)", color: "var(--ink3)", marginBottom: 32, lineHeight: 1.5 }}>
+              <p style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400, fontSize: "clamp(16px,1.6vw,19px)", color: "var(--ink3)", marginBottom: 12, lineHeight: 1.5 }}>
                 Four dinners a month. Any city. Any table.
+              </p>
+              <p style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400, fontSize: 15, color: "var(--ink3)", marginBottom: 32, lineHeight: 1.6, opacity: .75 }}>
+                Around $37 each. Less than most restaurants. Better than most nights.
               </p>
               <Rule align="left" />
               <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14, marginBottom: 40 }}>
                 {[
                   "Four dinners per month — RSVP to any table worldwide",
                   "Access to the full member directory",
-                  "Sponsored by an existing member",
-                  "Reviewed and approved by our team",
+                  "Open to anyone who shows up with an open mind",
+                  "We'll be in touch within two weeks — then just show up",
                   "Monthly billing — cancel anytime",
                 ].map((f, i) => (
                   <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
@@ -510,7 +572,7 @@ function Membership({ onApply }) {
                   "Home kitchen or restaurant — both equally welcome",
                   "Members worldwide discover and RSVP to your table",
                   "Free Basalith.xyz Estate membership — a $3,600/year value",
-                  "Sponsored by a member + reviewed by our team",
+                  "Sign up and agree to our guest code — be present, be kind, leave your phone in your pocket",
                 ].map((f, i) => (
                   <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                     <div style={{ width: 4, height: 4, borderRadius: "50%", background: "var(--bark)", opacity: .6, marginTop: 8, flexShrink: 0 }} />
@@ -527,7 +589,7 @@ function Membership({ onApply }) {
         <Reveal delay={.1}>
           <div style={{ padding: "52px var(--pad)", borderTop: "1px solid var(--linen3)", display: "grid", gridTemplateColumns: "repeat(3,1fr)" }}>
             {[
-              { n:"01", t:"Apply online.", b:"Tell us who you are and who's sponsoring you. A few honest paragraphs — no resume required." },
+              { n:"01", t:"Apply online.", b:"Tell us who you are. A few honest paragraphs — no resume required." },
               { n:"02", t:"We review.", b:"Our team reads every application personally. You'll hear back within two weeks." },
               { n:"03", t:"Come to the table.", b:"Activate your membership, find a dinner in your city — or anywhere you're traveling — and show up hungry." },
             ].map((s,i) => (
@@ -749,14 +811,14 @@ function ApplyModal({ onClose }) {
 
   const MEMBER_STEPS = [
     { label:"Tell us who you are.", fields:[{k:"name",ph:"Your full name",lbl:"Name"},{k:"city",ph:"Where you live",lbl:"City"},{k:"email",ph:"Email address",lbl:"Email"}] },
-    { label:"Who's sponsoring you?", fields:[{k:"sponsor",ph:"Name of your Welltable member",lbl:"Your sponsor"},{k:"relation",ph:"How do you know them?",lbl:"Relationship"}] },
+    { label:"A little more about you.", fields:[{k:"neighborhood",ph:"Your neighborhood or part of the city",lbl:"Where in town"},{k:"about",ph:"What brings you to the table?",lbl:"About you"}] },
     { label:"Why Welltable?", fields:[{k:"why",ph:"Say it however it comes. We'll read every word.",lbl:"In your own words",ta:true}] },
   ];
   const HOST_STEPS = [
     { label:"Tell us who you are.", fields:[{k:"name",ph:"Your full name",lbl:"Name"},{k:"city",ph:"Your city",lbl:"City"},{k:"email",ph:"Email address",lbl:"Email"}] },
     { label:"Tell us about your space.", fields:[{k:"type",ph:"Home kitchen or restaurant?",lbl:"Type of space"},{k:"capacity",ph:"How many can you comfortably seat?",lbl:"Capacity"}] },
     { label:"Tell us about your cooking.", fields:[{k:"cuisine",ph:"What cuisine or style do you cook?",lbl:"Your cuisine"},{k:"dish",ph:"The dish you're most proud of",lbl:"Signature dish"}] },
-    { label:"A few last things.", fields:[{k:"freq",ph:"Weekly, monthly, quarterly — be honest",lbl:"How often can you host?"},{k:"sponsor",ph:"Name of your Welltable member sponsor",lbl:"Your sponsor"}] },
+    { label:"A few last things.", fields:[{k:"freq",ph:"Weekly, monthly, quarterly — be honest",lbl:"How often can you host?"}] },
     { label:"Why do you want to host?", fields:[{k:"why",ph:"Tell us what feeding people means to you.",lbl:"In your own words",ta:true}] },
   ];
 
@@ -787,7 +849,7 @@ function ApplyModal({ onClose }) {
               </h3>
               <Rule align="left" />
               <p className="body" style={{marginTop:18,fontSize:14.5,lineHeight:1.85}}>
-                Our team reads every application personally. Find the member who sponsored you and thank them — they opened this door.
+                Our team reads every application personally. You'll hear back within two weeks — then all that's left is showing up hungry.
               </p>
             </motion.div>
           ) : !type ? (
@@ -796,7 +858,7 @@ function ApplyModal({ onClose }) {
               <h3 style={{fontFamily:"var(--serif)",fontStyle:"italic",fontWeight:400,fontSize:"clamp(20px,2.6vw,28px)",color:"var(--ink)",marginBottom:10,lineHeight:1.2}}>
                 How would you like to join?
               </h3>
-              <p className="body" style={{marginBottom:28,fontSize:14}}>Both paths require a sponsor — an existing Welltable member who knows you personally.</p>
+              <p className="body" style={{marginBottom:28,fontSize:14}}>Everyone is welcome at Welltable. We just ask that you arrive hungry, leave your phone in your pocket, and treat every host like they opened their home for you — because they did.</p>
               <div style={{display:"flex",flexDirection:"column",gap:12}}>
                 <button onClick={()=>setType("member")}
                   style={{padding:"22px 24px",border:"1px solid var(--linen3)",background:"transparent",cursor:"pointer",textAlign:"left",transition:"all .28s"}}
@@ -804,7 +866,7 @@ function ApplyModal({ onClose }) {
                   onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--linen3)";e.currentTarget.style.background="transparent";}}
                 >
                   <div style={{fontFamily:"var(--serif)",fontWeight:400,fontSize:18,color:"var(--ink)",marginBottom:6}}>Member</div>
-                  <div className="body" style={{fontSize:13}}>$150/month · Four dinners · Any city · Sponsored + team reviewed</div>
+                  <div className="body" style={{fontSize:13}}>$150/month · Four dinners · Any city · Open to all</div>
                 </button>
                 <button onClick={()=>setType("host")}
                   style={{padding:"22px 24px",border:"1px solid var(--linen3)",background:"transparent",cursor:"pointer",textAlign:"left",transition:"all .28s"}}
@@ -862,12 +924,23 @@ function ApplyModal({ onClose }) {
   );
 }
 
+const DONATE_LABELS = { 35: "Feed a Seat", 75: "Feed Two Seats", 150: "Feed a Full Table", 500: "Feed a Month of Tables" };
+const IMPACT_EQUIV = [
+  { val: "$35",  lbl: "one seat" },
+  { val: "$150", lbl: "full table" },
+  { val: "$500", lbl: "a month of dinners" },
+];
+
 function DonateModal({ onClose }) {
-  const [amt, setAmt] = useState(null);
+  const [amt, setAmt] = useState(35);
   const [custom, setCustom] = useState("");
   const [done, setDone] = useState(false);
-  const AMOUNTS = [25, 50, 100, 250];
+  const AMOUNTS = [35, 75, 150, 500];
   const inp = { width:"100%", background:"transparent", border:"none", borderBottom:"1px solid var(--linen3)", color:"var(--ink)", fontFamily:"var(--sans)", fontWeight:300, fontSize:16, letterSpacing:".018em", padding:"11px 0", outline:"none", transition:"border-color .32s" };
+
+  const btnLabel = amt && DONATE_LABELS[amt]
+    ? `Donate $${amt} — ${DONATE_LABELS[amt]}`
+    : custom ? `Donate $${custom}` : "";
 
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.45}}
@@ -903,6 +976,14 @@ function DonateModal({ onClose }) {
               <p className="body" style={{marginBottom:32,fontSize:14.5}}>
                 Your gift to Basalith.org covers food stipends for Table Hosts in cities around the world. Tax-deductible. Every dollar means one more evening where strangers become the people you call.
               </p>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",marginBottom:24,border:"1px solid var(--linen3)"}}>
+                {IMPACT_EQUIV.map((s,i)=>(
+                  <div key={s.val} style={{padding:"14px 12px",background:"var(--linen2)",borderLeft:i>0?"1px solid var(--linen3)":"none",textAlign:"center"}}>
+                    <div style={{fontFamily:"var(--serif)",fontStyle:"italic",fontWeight:400,fontSize:18,color:"var(--terra)",lineHeight:1,marginBottom:5}}>{s.val}</div>
+                    <div style={{fontFamily:"var(--sans)",fontWeight:300,fontSize:9,letterSpacing:".2em",textTransform:"uppercase",color:"var(--ink3)",opacity:.5}}>{s.lbl}</div>
+                  </div>
+                ))}
+              </div>
               <div className="eyebrow" style={{fontSize:8,marginBottom:12,opacity:.5}}>Choose an amount</div>
               <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginBottom:16}}>
                 {AMOUNTS.map(a=>(
@@ -916,7 +997,7 @@ function DonateModal({ onClose }) {
                 onFocus={e=>e.target.style.borderBottomColor="var(--terra)"}
                 onBlur={e=>e.target.style.borderBottomColor="var(--linen3)"} />
               <button className="btn btn-terra" onClick={()=>setDone(true)} style={{marginTop:32,width:"100%",textAlign:"center"}}>
-                Donate {amt?`$${amt}`:custom?`$${custom}`:""} to Basalith.org
+                {btnLabel}
               </button>
               <p style={{fontFamily:"var(--sans)",fontWeight:300,fontSize:11,color:"rgba(30,26,20,.32)",textAlign:"center",marginTop:14,letterSpacing:".04em"}}>
                 Secure · Tax-deductible · Basalith.org 501(c)(3)
@@ -949,11 +1030,11 @@ function Footer({ onApply, onDonate }) {
             </div>
             <div>
               <p className="body" style={{ marginBottom: 28, color: "rgba(242,237,228,.45)" }}>
-                Apply for membership. Open your table as a host. Or support the mission so more doors stay open to more strangers around the world.
+                For $35, you feed one stranger who becomes someone's person. For $150, you set an entire table. Every dollar goes directly to the hosts who make it possible.
               </p>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 <button className="btn btn-terra" onClick={onApply}>Apply Now</button>
-                <button className="btn btn-light" onClick={onDonate}>Donate</button>
+                <button className="btn btn-light" onClick={onDonate}>Donate — Feed a Table</button>
               </div>
             </div>
           </div>
@@ -998,6 +1079,7 @@ export default function Welltable() {
           <Nav onApply={() => setApplyOpen(true)} onDonate={() => setDonateOpen(true)} />
           <main>
             <Hero onApply={() => setApplyOpen(true)} onDonate={() => setDonateOpen(true)} />
+            <ImpactStrip />
             <Story />
             <HowItWorks />
             <Membership onApply={() => setApplyOpen(true)} />
